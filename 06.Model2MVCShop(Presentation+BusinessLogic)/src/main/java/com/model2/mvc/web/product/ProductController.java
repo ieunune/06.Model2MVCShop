@@ -31,12 +31,10 @@ public class ProductController {
 		System.out.println("ProductController Defualt Constructor");
 	}
 	
-	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
+	@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
-	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
+	@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	
@@ -122,13 +120,17 @@ public class ProductController {
 		}
 		search.setPageSize(pageSize);
 		
+		System.out.println(search + " :: ");
 		// Business logic 수행
+		System.out.println(search.getStartRowNum()+" "+search.getEndRowNum());
 		Map<String , Object> map=productService.getProductList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
+		System.out.println(resultPage + " :: ");
 		// Model 과 View 연결
+		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);

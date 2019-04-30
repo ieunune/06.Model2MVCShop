@@ -146,7 +146,7 @@ public class ProductServiceTest {
 	 	for(int i = 0 ; i < list.size() ; i ++) {
 	 		System.out.println(list.get(i));
 	 	}
-	 	Assert.assertEquals(3, list.size());
+	 	Assert.assertEquals(0, list.size());
 	 	
 		//==> console »Æ¿Œ
 	 	//System.out.println(list);
