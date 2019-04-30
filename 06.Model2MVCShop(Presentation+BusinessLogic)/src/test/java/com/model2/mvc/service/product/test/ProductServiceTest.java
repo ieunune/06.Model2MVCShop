@@ -134,7 +134,8 @@ public class ProductServiceTest {
 	 
 	 @Test
 	 public void testGetProductListAll() throws Exception{
-		 
+		
+		 System.out.println(" ¿¤·¼¤©¤© ");
 	 	Search search = new Search();
 	 	search.setCurrentPage(1);
 	 	search.setPageSize(3);
