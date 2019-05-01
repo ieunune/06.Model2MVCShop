@@ -47,7 +47,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/addProduct.do")
-	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product, HttpServletRequest request) throws Exception {
 
 		System.out.println("/addProduct.do");
 		//Business Logic
@@ -65,7 +65,9 @@ public class ProductController {
 		
 		productService.addProduct(product);
 		
-		return "redirect:/product/addProduct.jsp";
+		request.setAttribute("product", product);
+		
+		return "forward:/product/addProduct.jsp";
 	}
 	
 	@RequestMapping("/getProduct.do")
