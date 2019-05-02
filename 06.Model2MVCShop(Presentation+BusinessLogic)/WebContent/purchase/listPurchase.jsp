@@ -80,24 +80,21 @@
 					<td align="left">
 					${purchase.divyAddr}</td>
 					<td></td>
-					<td align="left"><c:if test="${purchase.tranCode=='1' }">
-						구매완료
-					</c:if>
 					<td align="left">
-					<c:if test="${purchase.tranCode()=='0'}">
-						구매완료 
-					</c:if>
-					<c:if test="${purchase.tranCode()=='1'}">
-						배송중
-					</c:if>
-					<c:if test="${purchase.tranCode()=='2'}">
-						배송완료
-					</c:if>
-				</td>
+						<c:if test="${purchase.tranCode=='000'}">
+							구매완료	
+						</c:if>
+						<c:if test="${purchase.tranCode=='001'}">
+							배송중	
+						</c:if>
+						<c:if test="${purchase.tranCode=='002'}">
+							배송완료	
+						</c:if>
+					</td>
 		<td></td>
 		<td align="left">
-			<c:if test="${purchase.tranCode()=='1'}">
-				<a href="updateTranCode.do?tranNo=${purchase.tranNo}&userId=${user.userId}" onclick="alert('수령완료처리 되었습니다.')">수령하기</a>
+			<c:if test="${purchase.tranCode=='001'}">
+				<a href="/updateTranCode.do?tranNo=${purchase.tranNo}&userId=${user.userId}" onclick="alert('수령완료처리 되었습니다.')">수령하기</a>
 			</c:if>
 		</td>
 				</c:forEach>

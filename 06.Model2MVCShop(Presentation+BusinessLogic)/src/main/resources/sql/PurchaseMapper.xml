@@ -44,7 +44,7 @@
 		#{receiverPhone},
 		#{divyAddr},
 		#{divyRequest},
-		0,
+		'000',
 		#{orderDate},
 		SYSDATE)
 	 </insert>
@@ -57,8 +57,25 @@
 	
 	<update id="updatePurchase" parameterType="purchase">
 		UPDATE transaction
-		SET payment_option = #{paymentOption}, receiver_name = #{receiverName}, receiver_phone=#{receiverPhone}, demailaddr=#{divyAddr}, DLVY_REQUEST=#{divyRequest}, tran_status_code=#{tranCode}, order_data=#{orderDate} 
+		SET payment_option = #{paymentOption}, 
+			receiver_name = #{receiverName}, 
+			receiver_phone=#{receiverPhone}, 
+			demailaddr=#{divyAddr}, 
+			DLVY_REQUEST=#{divyRequest},
+			order_data=#{orderDate:DATE} 
 		WHERE tran_no = #{tranNo}
+	</update>
+	
+	<update id="updateTranCodeByProdNo" parameterType="int">
+		UPDATE transaction
+		SET tran_status_code = '001'
+		WHERE prod_no = #{value}
+	</update>
+	
+	<update id="updateTranCodeByTranNo" parameterType="int">
+		UPDATE transaction
+		SET tran_status_code = '002'
+		WHERE tran_no = #{value}
 	</update>
 	
 	<select id="getPurchaseList" parameterType="hashmap" resultMap="purchaseSelectMap">
@@ -67,9 +84,8 @@
 	  					FROM		(	SELECT 
 										*
 										FROM transaction
-										<where>
+										WHERE
 											buyer_id = #{buyerId}
-										</where>
 										ORDER BY tran_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
@@ -78,7 +94,7 @@
 	<select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT *
-						FROM Purch
+						FROM transaction
 						 ) countTable						
 	 </select>
 	

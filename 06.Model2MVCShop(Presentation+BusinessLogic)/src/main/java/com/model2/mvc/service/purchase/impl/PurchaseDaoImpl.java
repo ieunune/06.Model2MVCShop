@@ -55,11 +55,9 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",search.getStartRowNum());
 		map.put("endRowNum",search.getEndRowNum());
-		map.put("pageSize",search.getPageSize());
-		map.put("currentPage",search.getCurrentPage());
 		map.put("buyerId",buyerId);
 		
-		System.out.println(map.get("buyerId").equals("user01")?"YES":"NO");
+		System.out.println(map.get("buyerId").equals("user15")?"YES":"NO");
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 		map.put("list", list);
@@ -75,6 +73,11 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
 		sqlSession.update("PurchaseMapper.updatePurchase", purchase);
+	}
+
+	@Override
+	public int getTotalCount(Search search) throws Exception {
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount",search);
 	}
 
 	

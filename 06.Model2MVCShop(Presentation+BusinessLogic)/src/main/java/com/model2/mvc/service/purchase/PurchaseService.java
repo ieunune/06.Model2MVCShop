@@ -24,4 +24,6 @@ public interface PurchaseService {
 	
 	public void updateTranCode(int prodNo) throws Exception;
 	
+	public int getTotalCount(Search search) throws Exception ;
+	
 }

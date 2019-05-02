@@ -18,4 +18,6 @@ public interface PurchaseDao {
 	public void updateTranCode(int tranNo) throws Exception;
 	
 	public void updatePurchase(Purchase purchase) throws Exception;
+	
+	public int getTotalCount(Search search) throws Exception ;
 }
