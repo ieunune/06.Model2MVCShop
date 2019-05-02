@@ -2,15 +2,14 @@ package com.model2.mvc.service.purchase;
 
 import java.util.HashMap;
 
+import java.util.Map;
+
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Purchase;
 
-
-
-
 public interface PurchaseService {
 
-	public int addPurchase(Purchase purchase) throws Exception;
+	public void addPurchase(Purchase purchase) throws Exception;
 	
 	public Purchase getPurchase(int tranNo) throws Exception;
 	
@@ -23,5 +22,7 @@ public interface PurchaseService {
 	public void updatePurcahse(Purchase purchaseVO) throws Exception;
 	
 	public void updateTranCode(int prodNo) throws Exception;
+
+	public void updateTranCodeByTranNo(int tranNo);
 	
 }

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,19 +35,20 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public int insertPurchase(Purchase purchase) throws Exception {
-		return sqlSession.insert("PurchaseMapper.addProduct", purchase);
+	public void addPurchase(Purchase purchase) throws Exception {
+		System.out.println(purchase.getPurchaseProd().getProdNo()+"@@@@@@");
+		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
 	}
 
 	@Override
 	public Purchase getPurchase(int tranNo) throws SQLException {
-		System.out.println(" :: PurchaseDaoImpl getPurchase :: "+"tranNo");
+		System.out.println(" :: PurchaseDaoImpl getPurchase :: "+tranNo);
 		return sqlSession.selectOne("PurchaseMapper.getPurchase", tranNo);
 	}
 
 	@Override
-	public void updateTranCode(int tranNo) throws Exception {
-		sqlSession.update("PurchaseMapper.updateTranCode", tranNo);
+	public void updateTranCode(int prodNo) throws Exception {
+		sqlSession.update("PurchaseMapper.updateTranCode", prodNo);
 	}
 
 	@Override
@@ -54,11 +57,11 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",search.getStartRowNum());
 		map.put("endRowNum",search.getEndRowNum());
-		map.put("pageSize",search.getPageSize());
-		map.put("currentPage",search.getCurrentPage());
 		map.put("buyerId",buyerId);
 		
-		List<Product> list = sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
+		System.out.println(map.get("buyerId").equals("user15")?"YES":"NO");
+		
+		List<Purchase> list = sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 		map.put("list", list);
 		
 		return map;
@@ -70,8 +73,21 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
-	public void updatePurcahse(Purchase purchase) throws Exception {
+	public void updatePurchase(Purchase purchase) throws Exception {
 		sqlSession.update("PurchaseMapper.updatePurchase", purchase);
+	}
+
+	@Override
+	public int getTotalCount(String buyerId) throws Exception {
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount",buyerId);
+	}
+
+	@Override
+	public void updateTranCodeByTranNo(int tranNo) {
+		
+		System.out.println(" @@@@@@@ " + tranNo);
+		
+		sqlSession.update("PurchaseMapper.updateTranCodeByTranNo", tranNo);
 	}
 
 	

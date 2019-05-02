@@ -86,7 +86,7 @@
 					align="absmiddle" />
 				</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01">${product.prodDatail}</td>
+				<td class="ct_write01">${product.prodDetail}</td>
 			</tr>
 			<tr>
 				<td height="1" colspan="3" bgcolor="D6D6D6"></td>
@@ -163,7 +163,7 @@
 			<tr>
 				<td width="104" class="ct_write">구매자주소</td>
 				<td bgcolor="D6D6D6" width="1"></td>
-				<td class="ct_write01"><input type="text" name="receiverAddr"
+				<td class="ct_write01"><input type="text" name="divyAddr"
 					class="ct_input_g" style="width: 100px; height: 19px"
 					maxLength="20" value="${user.addr}" /></td>
 			</tr>
@@ -174,7 +174,7 @@
 				<td width="104" class="ct_write">구매요청사항</td>
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td class="ct_write01"><input type="text"
-					name="receiverRequest" class="ct_input_g"
+					name="divyRequest" class="ct_input_g"
 					style="width: 100px; height: 19px" maxLength="20" /></td>
 			</tr>
 			<tr>
@@ -184,10 +184,10 @@
 				<td width="104" class="ct_write">배송희망일자</td>
 				<td bgcolor="D6D6D6" width="1"></td>
 				<td width="200" class="ct_write01"><input type="text"
-					readonly="readonly" name="receiverDate" class="ct_input_g"
+					readonly="readonly" name="orderDate" class="ct_input_g"
 					style="width: 100px; height: 19px" maxLength="20" /> <img
 					src="../images/ct_icon_date.gif" width="15" height="15"
-					onclick="show_calendar('document.addPurchase.receiverDate', document.addPurchase.receiverDate.value)" />
+					onclick="show_calendar('document.addPurchase.orderDate', document.addPurchase.orderDate.value)"/>
 				</td>
 			</tr>
 			<tr>

@@ -2,7 +2,9 @@ package com.model2.mvc.web.product;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/addProduct.do")
-	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product, HttpServletRequest request) throws Exception {
 
 		System.out.println("/addProduct.do");
 		//Business Logic
@@ -65,13 +67,19 @@ public class ProductController {
 		
 		productService.addProduct(product);
 		
-		return "redirect:/product/addProduct.jsp";
+		request.setAttribute("product", product);
+		
+		return "forward:/product/addProduct.jsp";
 	}
 	
 	@RequestMapping("/getProduct.do")
-	public String getProduct( @RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo , Model model, HttpSession session ) throws Exception {
+	public String getProduct( @RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo , Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		
 		System.out.println(" @@@@@@ "+menu);
+		
+		Cookie cookie = new Cookie("history", String.valueOf(prodNo));
+		cookie.setMaxAge(60*60*24);
+		response.addCookie(cookie);
 		
 		System.out.println("/getProduct.do");
 		//Business Logic

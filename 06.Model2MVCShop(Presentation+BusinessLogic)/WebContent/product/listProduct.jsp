@@ -119,7 +119,12 @@
 							<a href="/getProduct.do?prodNo=${product.prodNo}&menu=manage">${product.prodName}</a>
 						</c:if>
 						<c:if test="${param.menu =='search'}">
-							<a href="/getProduct.do?prodNo=${product.prodNo}&menu=search">${product.prodName}</a>
+							<c:if test="${product.proTranCode==null}">
+								<a href="/getProduct.do?prodNo=${product.prodNo}&menu=search">${product.prodName}</a>
+							</c:if>
+							<c:if test="${product.proTranCode!=null}">
+								${product.prodName}
+							</c:if>
 						</c:if>
 					</td>
 					<td></td>
@@ -127,7 +132,23 @@
 					<td></td>
 					<td align="left">${product.regDate}</td>
 					<td></td>
-					<td align="left">재고 있음</td>
+					<td align="left">
+						<c:if test="${product.proTranCode==null}">
+						판매중
+						</c:if>
+						<c:if test="${product.proTranCode=='000'}">
+						구매완료
+							<c:if test="${param.menu=='manage'}">
+								<a href="/updateTranCode.do?prodNo=${product.prodNo}&menu=manage" onclick="alert('배송이 완료되었습니다.')">배송하기</a>
+							</c:if>
+						</c:if>
+						<c:if test="${product.proTranCode=='001'}">
+						배송중
+						</c:if>
+						<c:if test="${product.proTranCode=='002'}">
+						배송완료
+						</c:if>
+						</td>
 				</tr>
 
 				<tr>

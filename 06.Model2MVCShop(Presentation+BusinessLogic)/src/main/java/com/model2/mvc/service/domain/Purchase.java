@@ -8,7 +8,7 @@ public class Purchase {
 	private String divyAddr; 				// 주소
 	private String divyDate; 				// 날짜
 	private String divyRequest; 			// 요청사항
-	private Date orderDate;					// 요청날짜
+	private String orderDate;					// 요청날짜
 	private String paymentOption; 			// 구매방식
 	private Product purchaseProd; 		// 상품번호
 	private String receiverName;		
@@ -43,10 +43,10 @@ public class Purchase {
 	public void setDivyRequest(String divyRequest) {
 		this.divyRequest = divyRequest;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getPaymentOption() {
@@ -88,7 +88,7 @@ public class Purchase {
 	
 	@Override
 	public String toString() {
-		return "PurchaseVO [buyer=" + buyer + ", divyAddr=" + divyAddr
+		return "Purchase [buyer=" + buyer + ", divyAddr=" + divyAddr
 				+ ", divyDate=" + divyDate + ", divyRequest=" + divyRequest
 				+ ", orderDate=" + orderDate + ", paymentOption="
 				+ paymentOption + ", purchaseProd=" + purchaseProd

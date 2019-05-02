@@ -2,6 +2,9 @@ package com.model2.mvc.service.purchase.impl;
 
 import java.util.HashMap;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,9 +28,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 		System.out.println(" PurchaseServiceImpl »ý¼ºÀÚ ");
 	}
 	@Override
-	public int addPurchase(Purchase purchase) throws Exception {
+	public void addPurchase(Purchase purchase) throws Exception {
 		System.out.println("========================= \n" + purchase);
-		return purchaseDao.insertPurchase(purchase);
+		purchaseDao.addPurchase(purchase);
 	}
 
 	@Override
@@ -41,8 +44,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public HashMap<String, Object> getPurchaseList(Search searchVO, String buyerId) throws Exception {
-		return purchaseDao.getPurchaseList(searchVO, buyerId);
+	public HashMap<String, Object> getPurchaseList(Search search, String buyerId) throws Exception {
+		
+		int totalCount = purchaseDao.getTotalCount(buyerId);
+		
+		HashMap<String, Object> map = purchaseDao.getPurchaseList(search, buyerId);
+		map.put("list", map.get("list"));
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
 	}
 
 	@Override
@@ -52,12 +62,16 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public void updatePurcahse(Purchase purchase) throws Exception {
-		purchaseDao.updatePurcahse(purchase);
+		purchaseDao.updatePurchase(purchase);
 	}
 
 	@Override
 	public void updateTranCode(int prodNo) throws Exception {
-		purchaseDao .updateTranCode(prodNo);
+		purchaseDao.updateTranCode(prodNo);
+	}
+	@Override
+	public void updateTranCodeByTranNo(int tranNo) {
+		purchaseDao.updateTranCodeByTranNo(tranNo);
 	}
 
 }
