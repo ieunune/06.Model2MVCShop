@@ -91,6 +91,9 @@
 							배송완료	
 						</c:if>
 					</td>
+					<tr>
+					<td colspan="11" bgcolor="D6D7D6" height="1"></td>
+					</tr>
 		<td></td>
 		<td align="left">
 			<c:if test="${purchase.tranCode=='001'}">

@@ -77,8 +77,11 @@ public class ProductController {
 		
 		System.out.println(" @@@@@@ "+menu);
 		
+		String temp=null;
 		Cookie cookie = new Cookie("history", String.valueOf(prodNo));
 		cookie.setMaxAge(60*60*24);
+		System.out.println("cookie : " + cookie);
+		temp += cookie+",";
 		response.addCookie(cookie);
 		
 		System.out.println("/getProduct.do");
