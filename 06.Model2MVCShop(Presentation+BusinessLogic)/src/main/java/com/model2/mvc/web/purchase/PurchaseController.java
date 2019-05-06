@@ -135,7 +135,7 @@ public class PurchaseController {
 		// Model ObjectScope¿¡ add
 		model.addAttribute("purchase", purchase);
 		
-		return "redirect:/updatePurchaseView.do";
+		return "redirect:/getPurchase.do?tranNo="+tranNo;
 	}
 	
 	@RequestMapping("/updateTranCode.do")
